@@ -1,7 +1,7 @@
 **Flutter Simple Calculator** 
 
 
-**Stage** In progress
+**Stage:** In progress
 
 **Time spent:** 20 min
 
