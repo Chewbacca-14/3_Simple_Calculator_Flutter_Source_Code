@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'buttons.dart';
 
@@ -10,6 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var userQuestion = '';
+  var userAnswer = '';
+
   final List<String> buttons = [
     'C',
     'DEL',
@@ -40,8 +44,33 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            //top area
             Expanded(
-              child: Container(),
+              child: Container(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      userQuestion,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      userAnswer,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ],
+              )),
             ),
             Expanded(
               flex: 2,
@@ -53,17 +82,36 @@ class _HomePageState extends State<HomePage> {
                             crossAxisCount: 4),
                     itemBuilder: (BuildContext context, int index) {
                       if (index == 0) {
+                        // C button
                         return Button(
+                            buttonTapped: () {
+                              setState(() {
+                                userQuestion = '';
+                              });
+                            },
                             color: Colors.grey,
                             textColor: Colors.white,
                             buttonText: buttons[index]);
                       } else if (index == 1) {
+                        // DEL button
                         return Button(
+                            buttonTapped: () {
+                             setState(() {
+                                userQuestion = userQuestion.substring(
+                                  0, userQuestion.length - 1);
+                             });
+                            },
                             color: Colors.red,
                             textColor: Colors.white,
                             buttonText: buttons[index]);
                       } else {
                         return Button(
+                            buttonTapped: () {
+                              setState(() {
+                                userQuestion = userQuestion + buttons[index];
+                              });
+                              HapticFeedback.vibrate();
+                            },
                             color: isOperator(buttons[index])
                                 ? Color.fromARGB(255, 87, 209, 60)
                                 : Colors.white,

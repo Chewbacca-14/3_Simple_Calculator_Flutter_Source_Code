@@ -3,7 +3,7 @@
 
 **Stage:** In progress
 
-**Time spent:** 20 min
+**Time spent:** 35 min
 
 **Discord:** Chewbacca#7777
 
