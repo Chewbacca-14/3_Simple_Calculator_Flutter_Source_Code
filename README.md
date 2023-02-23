@@ -13,4 +13,4 @@
 
 :anger:_by Max Bulanovich_
 
-![Screenshot_20230223_160058](https://user-images.githubusercontent.com/115110702/220992301-dccf94f0-ee36-4420-a055-0348743b2046.jpg  width = "300")
+<img src="[url](https://user-images.githubusercontent.com/115110702/220992301-dccf94f0-ee36-4420-a055-0348743b2046.jpg)" alt="alt text" width="100" height="100">
