@@ -1,9 +1,9 @@
 **Flutter Simple Calculator** 
 
 
-**Stage:** In progress
+**Stage:** Ready
 
-**Time spent:** 35 min
+**Time spent:** 45 min (with UI from scratch)
 
 **Discord:** Chewbacca#7777
 

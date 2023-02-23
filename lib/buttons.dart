@@ -10,7 +10,7 @@ class Button extends StatelessWidget {
       {required this.color,
       required this.textColor,
       required this.buttonText,
-       this.buttonTapped});
+      this.buttonTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +19,15 @@ class Button extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(8),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(50),
           child: Container(
             color: color,
             child: Center(
               child: Text(buttonText,
-                  style: TextStyle(color: textColor, fontSize: 20)),
+                  style: TextStyle(
+                      color: textColor,
+                      fontSize: 35,
+                      fontWeight: FontWeight.w400)),
             ),
           ),
         ),
