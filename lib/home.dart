@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
               )),
             ),
             Container(
-              height: 550,
+              height: MediaQuery.of(context).size.width * 1.25,
               child: GridView.builder(
                   itemCount: buttons.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -93,6 +93,7 @@ class _HomePageState extends State<HomePage> {
                             setState(() {
                               userQuestion = '';
                               userAnswer = '';
+                              HapticFeedback.vibrate();
                             });
                           },
                           color: Color.fromARGB(52, 197, 197, 197),
@@ -105,6 +106,7 @@ class _HomePageState extends State<HomePage> {
                             setState(() {
                               userQuestion = userQuestion.substring(
                                   0, userQuestion.length - 1);
+                                  HapticFeedback.vibrate();
                             });
                           },
                           color: Color.fromARGB(52, 197, 197, 197),
@@ -117,10 +119,14 @@ class _HomePageState extends State<HomePage> {
                             setState(() {
                               if (userQuestion == '') {
                                 userAnswer += '';
+                                HapticFeedback.vibrate();
                               } else {
                                 equalPressed();
+                                
                               }
+                              
                             });
+                            HapticFeedback.vibrate();
                           },
                           color: Colors.green,
                           textColor: Colors.white,
