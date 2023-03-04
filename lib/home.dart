@@ -1,7 +1,13 @@
+import 'package:calculator/plus_button.dart';
+import 'package:calculator/zero_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:math_expressions/math_expressions.dart';
+
+import '=button.dart';
 import 'buttons.dart';
+import 'delete_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,33 +20,30 @@ class _HomePageState extends State<HomePage> {
   var userQuestion = '';
   var userAnswer = '';
 
-  final List<String> buttons = [
-    'C',
-    'DEL',
-    '%',
+  final List buttons = [
+    'Ac',
     '/',
+    'x',
     '7',
     '8',
     '9',
-    'x',
+    '-',
     '4',
     '5',
     '6',
-    '-',
+    '+',
     '1',
     '2',
     '3',
-    '+',
-    '00',
+    '=',
     '0',
     '.',
-    '=',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0x17181A),
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -52,15 +55,17 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const SizedBox(
-                    height: 50,
+                    height: 25,
                   ),
                   Container(
                     padding: EdgeInsets.all(20),
                     alignment: Alignment.centerRight,
                     child: Text(
                       userQuestion,
-                      style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blue),
                     ),
                   ),
                   Container(
@@ -68,84 +73,287 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       userAnswer,
-                      style: TextStyle(fontSize: 25, color: Colors.grey[700]),
+                      style: TextStyle(
+                          fontSize: 50,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
-                  Container(
-                    color: Color.fromARGB(170, 158, 158, 158),
-                    width: MediaQuery.of(context).size.width,
-                    height: 2,
-                  )
                 ],
               )),
             ),
-            Container(
-              height: MediaQuery.of(context).size.width * 1.25,
-              child: GridView.builder(
-                  itemCount: buttons.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4),
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == 0) {
-                      // C button
-                      return Button(
-                          buttonTapped: () {
+
+            Column(
+              children: [
+                //first row | Ac, Delete, /, x
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    //Ac
+                    Button(
+                        buttonTapped: () {
+                          {
                             setState(() {
                               userQuestion = '';
                               userAnswer = '';
                               HapticFeedback.vibrate();
                             });
-                          },
-                          color: Color.fromARGB(52, 197, 197, 197),
-                          textColor: Colors.red,
-                          buttonText: buttons[index]);
-                    } else if (index == 1) {
-                      // DEL button
-                      return Button(
-                          buttonTapped: () {
+                          }
+                          ;
+                        },
+                        color: Color.fromARGB(255, 97, 97, 97),
+                        textColor: Color.fromARGB(255, 150, 150, 150),
+                        buttonText: buttons[0]),
+                    //Delete
+                    DeleteButton(
+                      color: Color.fromARGB(255, 97, 97, 97),
+                      buttonTapped: () {
+                        setState(() {
+                          userQuestion = userQuestion.substring(
+                              0, userQuestion.length - 1);
+                          HapticFeedback.vibrate();
+                        });
+                      },
+                    ),
+                    // /
+                    Button(
+                        buttonTapped: () {
+                          {
                             setState(() {
-                              userQuestion = userQuestion.substring(
-                                  0, userQuestion.length - 1);
+                              userQuestion = userQuestion + buttons[1];
+                            });
+                            HapticFeedback.vibrate();
+                          }
+                          ;
+                        },
+                        color: Color.fromARGB(255, 0, 92, 178),
+                        textColor: Color.fromARGB(255, 51, 156, 255),
+                        buttonText: buttons[1]),
+                    // x
+                    Button(
+                        buttonTapped: () {
+                          {
+                            setState(() {
+                              userQuestion = userQuestion + buttons[2];
+                            });
+                            HapticFeedback.vibrate();
+                          }
+                          ;
+                        },
+                        color: Color.fromARGB(255, 0, 92, 178),
+                        textColor: Color.fromARGB(255, 51, 156, 255),
+                        buttonText: buttons[2]),
+                  ],
+                ),
+                SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[3];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[3]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[4];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[4]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[5];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[5]),
+                          ],
+                        ),
+                        SizedBox(height: 25),
+                        Row(
+                          children: [
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[7];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[7]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[8];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[8]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[9];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[9]),
+                          ],
+                        ),
+                        SizedBox(height: 25),
+                        Row(
+                          children: [
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[11];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[11]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[12];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[12]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[13];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[13]),
+                          ],
+                        ),
+                        SizedBox(height: 25),
+                        Row(
+                          children: [
+                            ZButton(
+                                buttonTapped: () {
+                                  {
+                                    setState(() {
+                                      userQuestion = userQuestion + buttons[15];
+                                    });
+                                    HapticFeedback.vibrate();
+                                  }
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[15]),
+                            SizedBox(width: 25),
+                            Button(
+                                buttonTapped: () {
+                                  setState(() {
+                                    userQuestion = userQuestion + buttons[16];
+                                  });
                                   HapticFeedback.vibrate();
-                            });
-                          },
-                          color: Color.fromARGB(52, 197, 197, 197),
-                          textColor: Colors.redAccent,
-                          buttonText: buttons[index]);
-                    } else if (index == buttons.length - 1) {
-                      // = button
-                      return Button(
-                          buttonTapped: () {
-                            setState(() {
-                              if (userQuestion == '') {
-                                userAnswer += '';
-                                HapticFeedback.vibrate();
-                              } else {
-                                equalPressed();
-                                
-                              }
-                              
-                            });
-                            HapticFeedback.vibrate();
-                          },
-                          color: Colors.green,
-                          textColor: Colors.white,
-                          buttonText: buttons[index]);
-                    } else {
-                      return Button(
-                          buttonTapped: () {
-                            setState(() {
-                              userQuestion = userQuestion + buttons[index];
-                            });
-                            HapticFeedback.vibrate();
-                          },
-                          color: Color.fromARGB(52, 197, 197, 197),
-                          textColor: isOperator(buttons[index])
-                              ? Colors.green
-                              : Colors.grey[800],
-                          buttonText: buttons[index]);
-                    }
-                  }),
+                                },
+                                color: Color.fromARGB(255, 48, 49, 54),
+                                textColor: Color.fromARGB(255, 19, 141, 255),
+                                buttonText: buttons[16]),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 25),
+                    Column(
+                      children: [
+                        Button(
+                            buttonTapped: () {
+                              setState(() {
+                                userQuestion = userQuestion + buttons[6];
+                              });
+                              HapticFeedback.vibrate();
+                            },
+                            color: Color.fromARGB(255, 0, 92, 178),
+                            textColor: Color.fromARGB(255, 51, 156, 255),
+                            buttonText: buttons[6]),
+                        SizedBox(height: 25),
+                        EButton(
+                            buttonTapped: () {
+                              setState(() {
+                                userQuestion = userQuestion + buttons[10];
+                              });
+                              HapticFeedback.vibrate();
+                            },
+                            color: Color.fromARGB(255, 0, 92, 178),
+                            textColor: Color.fromARGB(255, 51, 156, 255),
+                            buttonText: buttons[10]),
+                        SizedBox(height: 25),
+                        EButton(
+                            buttonTapped: () {
+                              setState(() {
+                                if (userQuestion == '') {
+                                  userAnswer += '';
+                                  HapticFeedback.vibrate();
+                                } else {
+                                 
+                                  equalPressed();
+                                }
+                              });
+                            },
+                            color: Color.fromARGB(255, 0, 92, 178),
+                            textColor: Color.fromARGB(255, 51, 156, 255),
+                            buttonText: buttons[14]),
+                      ],
+                    )
+                  ],
+                )
+              ],
             ),
           ],
         ),
@@ -153,7 +361,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  bool isOperator(String x) {
+  bool isOperator(x) {
     if (x == '%' || x == '/' || x == 'x' || x == '-' || x == '+' || x == '=') {
       return true;
     }
